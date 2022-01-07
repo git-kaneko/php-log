@@ -1,5 +1,7 @@
 <?php
 
+namespace myLog;
+
 trait Singleton {
 
     static $instance;
