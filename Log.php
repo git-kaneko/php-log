@@ -16,8 +16,6 @@ use myLog\Settings;
  */
 class Log {
 
-    use Singleton; // trait
-
     const DEBUG = Logger::DEBUG;
     const INFO = Logger::INFO;
     const NOTICE = Logger::NOTICE;
@@ -29,29 +27,23 @@ class Log {
 
     private $logger;
 
-    public static function getLogger(): Logger {
-        return static::getInstance()->delayGetLogger();
-    }
-
-    /**
-     * 遅延束縛関数
-     */
-    private function delayGetLogger(): Logger {
-        if(!$this->logger) {
-            $this->logger = $this->createLogger();
-        }
-
-        return $this->logger;
+    private function getLogger(): Logger {
+        return $this->createLogger();
     }
 
     /**
      * loggerインスタンス作成関数
      */
     private function createLogger(): Logger {
-        $logger = new Logger(Settings::NAME);
-        $logger->pushHandler($this->getHandler());
 
-        return $logger;
+        if(isset($this->logger)) {
+            $this->logger;
+        }
+
+        $this->logger = new Logger(Settings::NAME);
+        $this->logger->pushHandler($this->getHandler());
+
+        return $this->logger;
     }
 
     private function getHandler() {
@@ -72,36 +64,36 @@ class Log {
         return $formatter;
     }
 
-    public static function debug(string $text, array $context = []) {
-        static::getLogger()->debug($text, $context);
+    public function debug(string $text, array $context = []) {
+        $this->getLogger()->debug($text, $context);
     }
 
-    public static function info(string $text, array $context = []) {
-        static::getLogger()->info($text, $context);
+    public function info(string $text, array $context = []) {
+        $this->getLogger()->info($text, $context);
     }
 
-    public static function notice(string $text, array $context = []) {
-        static::getLogger()->notice($text, $context);
+    public function notice(string $text, array $context = []) {
+        $this->getLogger()->notice($text, $context);
     }
 
-    public static function warning(string $text, array $context = []) {
-        static::getLogger()->warning($text, $context);
+    public function warning(string $text, array $context = []) {
+        $this->getLogger()->warning($text, $context);
     }
 
-    public static function error(string $text, array $context = []) {
-        static::getLogger()->error($text, $context);
+    public function error(string $text, array $context = []) {
+        $this->getLogger()->error($text, $context);
     }
 
-    public static function critical(string $text, array $context = []) {
-        static::getLogger()->critical($text, $context);
+    public function critical(string $text, array $context = []) {
+        $this->getLogger()->critical($text, $context);
     }
 
-    public static function alert(string $text, array $context = []) {
-        static::getLogger()->alert($text, $context);
+    public function alert(string $text, array $context = []) {
+        $this->getLogger()->alert($text, $context);
     }
 
-    public static function emergency(string $text, array $context = []) {
-        static::getLogger()->emergency($text, $context);
+    public function emergency(string $text, array $context = []) {
+        $this->getLogger()->emergency($text, $context);
     }
 }
 
