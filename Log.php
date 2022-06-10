@@ -80,8 +80,8 @@ class Log {
         static::getLogger()->info($text, $context);
     }
 
-    public static function nottice(string $text, array $context = []) {
-        static::getLogger()->nottice($text, $context);
+    public static function notice(string $text, array $context = []) {
+        static::getLogger()->notice($text, $context);
     }
 
     public static function warning(string $text, array $context = []) {
