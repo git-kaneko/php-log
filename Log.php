@@ -9,6 +9,9 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Formatter\LineFormatter;
 use myLog\Settings;
 
+// デフォルトがUTCなので日本時間へ
+date_default_timezone_set("Asia/Tokyo");
+
 /**
  * ログクラス
  * 
